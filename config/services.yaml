@@ -1,0 +1,36 @@
+services:
+    App\Controller\MainPageController:
+        autowire: true
+        autoconfigure: true
+    App\Controller\PageWithCustomFilterController:
+        autowire: true
+        autoconfigure: true
+    App\Controller\ElementController:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    App\Services\GetRedListCategories:
+        autowire: true
+        autoconfigure: true
+    App\Services\GetAnimalData:
+        autowire: true
+        autoconfigure: true
+    App\Services\GetCountryList:
+        autowire: true
+        autoconfigure: true
+    App\Services\GetGroupList:
+        autowire: true
+        autoconfigure: true
+    App\Services\GetActionList:
+        autowire: true
+        autoconfigure: true
+    App\Services\GetKingdomList:
+        autowire: true
+        autoconfigure: true
+    App\Services\GetClassList:
+        autowire: true
+        autoconfigure: true
+    App\Services\GetFamilyList:
+        autowire: true
+        autoconfigure: true

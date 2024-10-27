@@ -1,0 +1,48 @@
+{% extends 'index.html.twig' %}
+
+{% block main %}
+    <div class="animal_element-container">
+        <div class="animal_element">
+            <div class="animal_element-name">
+                <h1>{{ animal.getName() }}</h1>
+            </div>
+            {% if animal.getImageSrc() is defined and animal.getImageSrc() != "" %}
+                <div class="animal_element-image">
+                    <img src="{{ animal.getImageSrc() }}" alt="{{ animal.getName() }}" loading="lazy" width="1440px"/>
+                </div>
+            {% endif %}
+            <div class="animal_element-character">
+                <div class="animal_element-character_kingdom">
+                    <span>Kingdom</span>
+                    <span>{{ animal.getKingdom() ? animal.getKingdom().getKingdomName() : 'N/A' }}</span>
+                </div>
+                <div class="animal_element-character_class">
+                    <span>Class</span>
+                    <span>{{ animal.getClasses() ? animal.getClasses().getClassesName() : 'N/A' }}</span>
+                </div>
+                <div class="animal_element-character_category">
+                    <span>Category</span>
+                    <span>{{ animal.getCategory() ? animal.getCategory().getCategoryName() : 'N/A' }}</span>
+                </div>
+                <div class="animal_element-character_family">
+                    <span>Family</span>
+                    <span>{{ animal.getFamily() ? animal.getFamily().getFamilyName() : 'N/A' }}</span>
+                </div>
+            </div>
+            <div class="animal_element-body">
+                <div class="animal_element-body_range">
+                    {{ animal.getRange() |raw }}
+                </div>
+                <div class="animal_element-body_population">
+                    {{ animal.getPopulation() |raw }}
+                </div>
+                <div class="animal_element-body_habitats">
+                    {{ animal.getHabitats() |raw }}
+                </div>
+                <div class="animal_element-body_threats">
+                    {{ animal.getThreats() |raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

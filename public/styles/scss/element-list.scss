@@ -1,0 +1,118 @@
+@import "_variables.scss";
+
+.animal {
+  &-list{
+    &_container{
+      font-size: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+
+      a {
+        text-decoration: none;
+        color: $white;
+        margin-bottom: 20px;
+        &:hover {
+          margin-bottom: 0;
+          .animal-list_element-read-more {
+            position: relative;
+            z-index: 100;
+            bottom: 28px;
+            height: 20px;
+            div {
+              padding-top: 30px;
+              position: relative;
+              z-index: 100;
+              bottom: 0;
+              border-radius: 15px;
+            }
+          }
+        }
+      }
+    }
+
+    &_element {
+      border: 1px solid $black;
+      border-radius: 15px;
+      &-container {
+        color: $white;
+        box-sizing: border-box;
+        padding: 15px;
+        transition: all 0.3s;
+        margin: 0 20px 20px 20px;
+        max-width: 330px;
+
+        &:hover {
+          margin-bottom: 0;
+        }
+      }
+      &-image {
+        display: flex;
+        align-items: center;
+        height: 400px;
+        img {
+          border-top-left-radius: 15px;
+          border-top-right-radius: 15px;
+          width: 298px;
+          height: 400px;
+          object-fit: cover;
+        }
+        span {
+          color: $black;
+          text-align: center;
+          border-top-left-radius: 15px;
+          border-top-right-radius: 15px;
+          max-height: 400px;
+          width: 298px;
+        }
+      }
+      &-body {
+        position: relative;
+        z-index: 200;
+        padding: 10px;
+        background-color: $red;
+        display: flex;
+        flex-wrap: wrap;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        &_name{
+          text-transform: uppercase;
+          width: 100%;
+          text-align: center;
+        }
+        &_kingdom,
+        &_class,
+        &_family,
+        &_category,
+        &_country {
+          span:nth-child(even) {
+            text-transform: uppercase;
+        }
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+
+      &-read-more {
+        div {
+          color: $black;
+          transition: all 0.3s;
+          background-color: $lightRed;
+        }
+        text-align: center;
+        position: relative;
+        z-index: 100;
+        bottom: 50px;
+        height: 0;
+        transition: all 0.3s;
+      }
+    }
+  }
+}
+
+@media (max-width: 659px) {
+  .animal-list_element-container {
+    margin: 0;
+  }
+}

@@ -1,0 +1,27 @@
+@import "variables";
+
+.page-with-filter {
+  padding: 20px;
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+}
+
+.global-list {
+  h3 {
+    padding: 0 20px;
+  }
+}
+
+.pagination {
+  text-align: center;
+  a {
+    color: $black;
+    text-decoration: none;
+    margin: 0 2px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

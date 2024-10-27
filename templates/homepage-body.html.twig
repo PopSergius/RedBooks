@@ -1,0 +1,105 @@
+{% extends 'index.html.twig' %}
+
+{% block main %}
+    <div class="homepage main-content homepage-main_content">
+        <div class="homepage-block content-block">
+            <div class="homepage-block_title content-block_title" style="text-align: center">
+                <h1>{{ pageTitle }}</h1>
+            </div>
+            <div class="homepage-block_description content-block_description">
+                <h2 style="text-align: center">Welcome to the Red Book Site</h2>
+                <p>This site is designed to familiarize you with the Red Book, an important document that highlights the
+                    status of endangered species and ecosystems. Our goal is to raise awareness and promote conservation
+                    efforts for these invaluable resources.</p>
+
+                <p>If you're looking for something specific, we provide a dedicated filter page. Here, you can refine
+                    your search by selecting particular groups, categories, or even countries. This feature enables you
+                    to find the exact information you need quickly and efficiently, whether you're a researcher,
+                    student, or simply a nature enthusiast.</p>
+            </div>
+        </div>
+
+        <!-- Слайдер -->
+        <div class="animal-slider">
+            {% for animal in animals %}
+                <div class="animal-slide">
+                    <div class="animal-list_element">
+                        <div class="animal-list_element-image">
+                            {% if animal.getImageSrc() is defined and animal.getImageSrc() != "" %}
+                                <img src="{{ animal.getImageSrc() }}" alt="{{ animal.getName() }}" />
+                            {% else %}
+                                <span>Image not found</span>
+                            {% endif %}
+                        </div>
+                        <div class="animal-list_element-body">
+                            <div class="animal-list_element-body_name">
+                                <span>{{ animal.getName() }}</span>
+                            </div>
+                            <div class="animal-list_element-body_kingdom">
+                                <span>Kingdom: </span>
+                                <span>{{ animal.getKingdom() ? animal.getKingdom().getKingdomName() : 'N/A' }}</span>
+                            </div>
+                            <div class="animal-list_element-body_class">
+                                <span>Class:</span>
+                                <span>{{ animal.getClasses() ? animal.getClasses().getClassesName() : 'N/A' }}</span>
+                            </div>
+                            <div class="animal-list_element-body_category">
+                                <span>Category:</span>
+                                <span>{{ animal.getCategory() ? animal.getCategory().getCategoryName() : 'N/A' }}</span>
+                            </div>
+                            <div class="animal-list_element-body_family">
+                                <span>Family:</span>
+                                <span>{{ animal.getFamily() ? animal.getFamily().getFamilyName() : 'N/A' }}</span>
+                            </div>
+                            <div class="animal-list_element-body_country">
+                                <span>Country:</span> {% for country in animal.getCountries() %}
+                                    <span>{{ country.getCountryName() }}</span>
+                                {% else %}
+                                    No countries available
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="{{ asset('js/jquery.min.js') }}"></script> <!-- Якщо jQuery ще не підключений -->
+    <script src="{{ asset('js/slick.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.animal-slider').slick({
+                slidesToShow: 4,
+                // autoplay: true,
+                // autoplaySpeed: 3000,
+                infinite: true,
+                swipeToSlide: true,
+                centerMode: true,
+                centerPadding: '0px',
+                responsive: [
+                    {
+                        breakpoint: 1400,
+                        settings: {
+                            slidesToShow: 3,
+                        }
+                    },
+                    {
+                        breakpoint: 1145,
+                        settings: {
+                            slidesToShow: 2,
+                        }
+                    },
+                    {
+                        breakpoint: 720,
+                        settings: {
+                            slidesToShow: 1,
+                            centerMode: true,
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+{% endblock %}
+

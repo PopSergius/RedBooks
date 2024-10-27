@@ -1,0 +1,127 @@
+{% extends 'index.html.twig' %}
+
+{% block main %}
+    <div class="page-with-filter">
+        <h2>Filter Animals</h2>
+
+        <form method="POST" action="{{ path('filter_animals') }}">
+            <label for="category">Category:</label>
+            <select id="category" name="category">
+                {% for category in categories %}
+                    <option value="{{ category.Category_code }}"
+                            {% if selected_category == category.Category_code %}selected{% endif %}>
+                        {{ category.Category_name }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <label for="category">Country:</label>
+            <select id="country" name="country">
+                {% for country in countries %}
+                    <option value="{{ country.Country_code }}"
+                            {% if selected_country == country.Country_code %}selected{% endif %}>
+                        {{ country.Country_name }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Filter</button>
+        </form>
+    </div>
+
+
+    {% if animals is defined %}
+        <div class="global-list">
+            <h3>Filtered Animals:</h3>
+            <div class="animal-list_container">
+                {% if animals|length > 0 %}
+                    {% for animal in animals %}
+                        <div class="animal-list_element-container">
+                            <a href="{{ path('element_page', { 'element_id': animal.id }) }}">
+                                <div class="animal-list_element">
+                                    <div class="animal-list_element-image">
+                                        {% if animal.getImageSrc() is defined and animal.getImageSrc() != "" %}
+                                            <img src="{{ animal.getImageSrc() }}" alt="{{ animal.getName() }}"/>
+                                        {% else %}
+                                            <span>Image not found</span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="animal-list_element-body">
+                                        <div class="animal-list_element-body_name">
+                                            <span>{{ animal.getName() }}</span>
+                                        </div>
+                                        <div class="animal-list_element-body_kingdom">
+                                            <span>Kingdom: </span>
+                                            <span>{{ animal.getKingdom() ? animal.getKingdom().getKingdomName() : 'N/A' }}</span>
+                                        </div>
+                                        <div class="animal-list_element-body_class">
+                                            <span>Class:</span>
+                                            <span>{{ animal.getClasses() ? animal.getClasses().getClassesName() : 'N/A' }}</span>
+                                        </div>
+                                        <div class="animal-list_element-body_category">
+                                            <span>Category:</span>
+                                            <span>{{ animal.getCategory() ? animal.getCategory().getCategoryName() : 'N/A' }}</span>
+                                        </div>
+                                        <div class="animal-list_element-body_family">
+                                            <span>Family:</span>
+                                            <span>{{ animal.getFamily() ? animal.getFamily().getFamilyName() : 'N/A' }}</span>
+                                        </div>
+                                        <div class="animal-list_element-body_country">
+                                            <span>Country:</span> {% for country in animal.getCountries() %}
+                                                <span>{{ country.getCountryName() }}</span>
+                                            {% else %}
+                                                No countries available
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="animal-list_element-read-more">
+                                        <div>ReadMore</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="not-found"><h2>Elements not found</h2></div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+
+    {# Pagination #}
+    <div class="pagination">
+        {% set totalPages = (total_animals / items_per_page)|round(0, 'ceil') %}
+
+        {% if totalPages > 1 %}
+            {% if current_page > 1 %}
+                <a href="?page={{ current_page - 1 }}&category={{ selected_category }}&country={{ selected_country }}">Previous</a>
+            {% endif %}
+
+            {% set visiblePages = 2 %} {# Кількість видимих сторінок з обох боків поточної сторінки #}
+
+            {% if current_page > (visiblePages + 1) %}
+                <a href="?page=1&category={{ selected_category }}&country={{ selected_country }}">1</a>
+                {% if current_page > (visiblePages + 2) %}
+                    <span>...</span> {# Пропуск сторінок #}
+                {% endif %}
+            {% endif %}
+
+            {% for i in range(max(2, current_page - visiblePages), min(totalPages - 1, current_page + visiblePages) + 1) %}
+                <a href="?page={{ i }}&category={{ selected_category }}&country={{ selected_country }}"
+                   class="{{ i == current_page ? 'active' : '' }}">{{ i }}</a>
+            {% endfor %}
+
+            {% if current_page < (totalPages - visiblePages) %}
+                {% if current_page < (totalPages - visiblePages - 1) %}
+                    <span>...</span> {# Пропуск сторінок #}
+                {% endif %}
+                <a href="?page={{ totalPages }}&category={{ selected_category }}&country={{ selected_country }}">{{ totalPages }}</a>
+            {% endif %}
+
+            {% if current_page < totalPages %}
+                <a href="?page={{ current_page + 1 }}&category={{ selected_category }}&country={{ selected_country }}">Next</a>
+            {% endif %}
+        {% endif %}
+    </div>
+
+{% endblock %}

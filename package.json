@@ -1,0 +1,19 @@
+{
+  "name": "redbook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^5.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^5.1.0",
+    "jquery": "^3.7.1",
+    "sass": "^1.79.4",
+    "slick-carousel": "^1.8.1"
+  }
+}

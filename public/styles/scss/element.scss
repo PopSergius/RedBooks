@@ -1,0 +1,85 @@
+@import "_variables.scss";
+
+.animal {
+  &_element {
+    &-container {
+
+    }
+
+    &-name {
+      text-align: center;
+      color: $black;
+      padding: 20px;
+    }
+
+    &-image {
+      box-shadow: 0 -5px 20px $red;
+      text-align: center;
+      img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+      }
+    }
+
+    &-character {
+      margin-top: -5px;
+      margin-bottom: 20px;
+      border-bottom-right-radius: 30px;
+      border-bottom-left-radius: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      background: linear-gradient(to bottom, $red, $lightRed);
+      padding: 20px 0;
+      div {
+        text-align: center;
+        width: 150px;
+        padding: 10px 15px;
+        border-radius: 20px;
+        position: relative;
+        span {
+          &:nth-child(even) {
+            opacity: 0;
+            text-transform: uppercase;
+            display: block;
+            height: 0;
+            top: 37px;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            left: 50%;
+            width: 180px;
+            position: absolute;
+          }
+
+          &:nth-child(odd) {
+            text-transform: uppercase;
+          }
+        }
+
+        &:hover {
+
+          span:nth-child(even) {
+            height: 20px;
+            top: 30px;
+            transform: translateX(-50%);
+            left: 50%;
+            width: 180px;
+            opacity: 1;
+            display: block;
+            position: absolute;
+            border-radius: 30px;
+          }
+        }
+      }
+    }
+
+    &-body {
+      padding: 0 20px;
+      div {
+        text-align: justify;
+        margin-bottom: 15px;
+      }
+    }
+  }
+}

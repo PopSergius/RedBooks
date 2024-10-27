@@ -1,0 +1,14 @@
+home:
+    path: /
+    controller: App\Controller\MainPageController::index
+test:
+    path: /test
+    controller: App\Controller\MainPageController::second
+
+filter_animals:
+    path: /filter
+    controller: App\Controller\PageWithCustomFilterController::pageFilter
+
+element_page:
+    path: /element/{element_id}
+    controller: App\Controller\ElementController::elementPage

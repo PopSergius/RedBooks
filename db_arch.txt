@@ -1,0 +1,69 @@
+-- Створення бази даних
+CREATE DATABASE IF NOT EXISTS RedBooks;
+USE RedBooks;
+
+-- Створення таблиці Kingdom
+CREATE TABLE Kingdom (
+    Kingdom_code VARCHAR(50) PRIMARY KEY,
+    Kingdom_name VARCHAR(100) NOT NULL
+);
+
+-- Створення таблиці Country
+CREATE TABLE Country (
+    Country_code VARCHAR(50) PRIMARY KEY,
+    Country_name VARCHAR(100) NOT NULL
+);
+
+-- Створення таблиці Group
+CREATE TABLE `Group` (
+    Group_code VARCHAR(50) PRIMARY KEY,
+    Group_name VARCHAR(100) NOT NULL
+);
+
+-- Створення таблиці Classes
+CREATE TABLE Classes (
+    Classes_code VARCHAR(50) PRIMARY KEY,
+    Classes_name VARCHAR(100) NOT NULL
+);
+
+-- Створення таблиці Category
+CREATE TABLE Category (
+    Category_code VARCHAR(50) PRIMARY KEY,
+    Category_name VARCHAR(100) NOT NULL
+);
+
+-- Створення таблиці Family
+CREATE TABLE Family (
+    Family_code VARCHAR(50) PRIMARY KEY,
+    Family_name VARCHAR(100) NOT NULL
+);
+
+-- Створення таблиці Object
+CREATE TABLE Object (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(100) NOT NULL,
+    Kingdom_code VARCHAR(50),
+    Group_code VARCHAR(50),
+    Classes_code VARCHAR(50),
+    Category_code VARCHAR(50),
+    Family_code VARCHAR(50),
+    Range VARCHAR(255),
+    Population VARCHAR(100),
+    Habitats TEXT,
+    Threats TEXT,
+    ImageSrc VARCHAR(255),
+    FOREIGN KEY (Kingdom_code) REFERENCES Kingdom(Kingdom_code),
+    FOREIGN KEY (Group_code) REFERENCES `Group`(Group_code),
+    FOREIGN KEY (Classes_code) REFERENCES Classes(Classes_code),
+    FOREIGN KEY (Category_code) REFERENCES Category(Category_code),
+    FOREIGN KEY (Family_code) REFERENCES Family(Family_code)
+);
+
+-- Створення таблиці ObjectCountry
+CREATE TABLE ObjectCountry (
+    OB_id INT PRIMARY KEY AUTO_INCREMENT,
+    Id INT,
+    Country_code VARCHAR(50),
+    FOREIGN KEY (Id) REFERENCES Object(Id),
+    FOREIGN KEY (Country_code) REFERENCES Country(Country_code)
+);
